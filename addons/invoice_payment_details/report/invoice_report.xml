@@ -28,7 +28,7 @@
                                 <tbody>
                                     <t t-foreach="o.payment_ids.filtered(lambda p: p.state == 'posted')" t-as="pay">
                                         <tr>
-                                            <td><span t-field="pay.payment_date"/></td>
+                                            <td><span t-field="pay.date"/></td>
                                             <td class="text-right">
                                                 <span t-field="pay.amount"
                                                       t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>

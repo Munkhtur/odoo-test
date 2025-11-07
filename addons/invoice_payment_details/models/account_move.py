@@ -21,6 +21,16 @@ class AccountMove(models.Model):
                 move.amount_paid = 0.0
     
 
+    payment_ids = fields.One2many(
+        'account.payment',
+        compute='_compute_payment_ids',
+        string='Payments',
+    )
+
+    def _compute_payment_ids(self):
+        for move in self:
+            move.payment_ids = move._get_reconciled_payments()
+
     def action_open_payment_history(self):
         self.ensure_one()
         return {

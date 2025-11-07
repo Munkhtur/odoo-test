@@ -7,12 +7,12 @@ class InvoicePaymentWizard(models.TransientModel):
     move_id = fields.Many2one('account.move', required=True, ondelete='cascade')
     payment_line_ids = fields.One2many('invoice.payment.line', 'wizard_id')
 
-    def _get_payment_lines(self):
+    def _get_payment_lines(self, move):
         lines = []
-        payments = self.move_id._get_reconciled_payments().filtered(lambda p: p.state == 'posted')
+        payments = move._get_reconciled_payments().filtered(lambda p: p.state == 'posted')
         for pay in payments:
             lines.append((0, 0, {
-                'payment_date': pay.payment_date,
+                'payment_date': pay.date,
                 'amount': pay.amount,
                 'journal_id': pay.journal_id.id,
                 'ref': pay.ref or pay.name,
@@ -27,7 +27,7 @@ class InvoicePaymentWizard(models.TransientModel):
         if move_id:
             move = self.env['account.move'].browse(move_id)
             res['move_id'] = move.id
-            res['payment_line_ids'] = self._get_payment_lines()
+            res['payment_line_ids'] = self._get_payment_lines(move)
         return res
 
 
