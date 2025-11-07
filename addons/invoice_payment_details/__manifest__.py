@@ -17,11 +17,12 @@
     'website': 'https://www.yourcompany.com',
     'depends': ['account', 'base'],
     'data': [
-        'security/ir.model.access.csv',
         'views/account_move_views.xml',
         'views/payment_wizard_views.xml',
+        'security/ir.model.access.csv',
         'report/invoice_report.xml',
     ],
+
     'installable': True,
     'application': False,
     'auto_install': False, 
