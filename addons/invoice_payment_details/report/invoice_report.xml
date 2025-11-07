@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit the main invoice document template -->
+        <template id="report_invoice_document_inherit_paid"
+                  inherit_id="account.report_invoice_document">
+
+            <!-- Find the section where invoice lines are shown -->
+            <xpath expr="//div[hasclass('page')]" position="inside">
+
+                <!-- Only show if there are payments -->
+                <t t-if="o.payment_ids">
+                    <div class="row mt32">
+                        <div class="col-12">
+                            <h5 style="border-bottom: 1px solid #dee2e6; padding-bottom: 8px;">
+                                Төлбөрийн түүх
+                            </h5>
+                            <table class="table table-sm table-bordered">
+                                <thead style="background-color: #f8f9fa;">
+                                    <tr>
+                                        <th class="text-left">Огноо</th>
+                                        <th class="text-right">Дүн</th>
+                                        <th class="text-left">Журнал</th>
+                                        <th class="text-left">Тайлбар</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.payment_ids.filtered(lambda p: p.state == 'posted')" t-as="pay">
+                                        <tr>
+                                            <td><span t-field="pay.payment_date"/></td>
+                                            <td class="text-right">
+                                                <span t-field="pay.amount"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                            <td><span t-field="pay.journal_id"/></td>
+                                            <td><span t-esc="pay.ref or pay.name"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

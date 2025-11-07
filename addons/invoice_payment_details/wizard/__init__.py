@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-from . import payment_history_wizard
+from . import payment_wizard

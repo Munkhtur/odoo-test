@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Wizard Form View -->
+    <record id="view_invoice_payment_wizard_form" model="ir.ui.view">
+        <field name="name">invoice.payment.wizard.form</field>
+        <field name="model">invoice.payment.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Payment History">
+                <group>
+                    <field name="move_id" readonly="1"/>
+                    <field name="payment_line_ids">
+                        <tree editable="false">
+                            <field name="payment_date"/>
+                            <field name="amount"/>
+                            <field name="journal_id"/>
+                            <field name="ref"/>
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button string="Close" class="btn-primary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View for Invoice Payment Lines (Optional if inline tree works) -->
+    <record id="view_invoice_payment_line_tree" model="ir.ui.view">
+        <field name="name">invoice.payment.line.tree</field>
+        <field name="model">invoice.payment.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="payment_date"/>
+                <field name="amount"/>
+                <field name="journal_id"/>
+                <field name="ref"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>
