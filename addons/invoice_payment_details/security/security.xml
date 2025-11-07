@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="payment_history_rule_accountant" model="ir.rule">
+        <field name="name">Payment History Wizard for Accountants</field>
+        <field name="model_id" ref="account.model_account_move"/> <!-- temporarily use account.move -->
+        <field name="domain_force">[('id','!=',False)]</field>
+        <field name="groups" eval="[(4, ref('account.group_account_manager'))]"/>
+    </record>
+</odoo>

@@ -1,0 +1,31 @@
+<odoo>
+    <record id="demo_partner" model="res.partner">
+        <field name="name">Test Customer</field>
+    </record>
+
+    <!-- 2 invoices -->
+    <record id="invoice_1" model="account.move">
+        <field name="move_type">out_invoice</field>
+        <field name="partner_id" ref="demo_partner"/>
+        <field name="invoice_date">2025-11-06</field>
+        <field name="invoice_line_ids">
+            <value>
+                <account.move.line name="Product A" quantity="1" price_unit="100"/>
+            </value>
+        </field>
+    </record>
+
+    <record id="invoice_2" model="account.move">
+        <field name="move_type">out_invoice</field>
+        <field name="partner_id" ref="demo_partner"/>
+        <field name="invoice_date">2025-11-06</field>
+        <field name="invoice_line_ids">
+            <value>
+                <account.move.line name="Product B" quantity="2" price_unit="50"/>
+            </value>
+        </field>
+    </record>
+
+    <!-- Add 5 payments per invoice -->
+    <!-- Simplified example -->
+</odoo>
